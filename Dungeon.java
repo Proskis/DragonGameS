@@ -20,7 +20,8 @@ public class Dungeon {
             
             //rad 0 med kolumner
                 {
-                new Room("Exit (g)", "put some text here."),
+                new Room("Exit (g)", "You escape the dungeon and make it outside. \n"
+                         + "You're free and can enjoy the breath of fresh air"),
         
                 null,
         
@@ -28,7 +29,27 @@ public class Dungeon {
                          + "A beast of a dragon sleeping! The dragon is huge and takes up almost half the room space.\n"
                          + "Right next to the sleeping dragon you spot a chest filled with treasure.\n"
                          + "To get to the treasure you have to move cautiously to not wake the dragon up.\n"
-                         + "There appears to be a padlock with a 3 digit code on the treasure chest.")
+                         + "There appears to be a padlock with a 3 digit code on the treasure chest.\n"
+                         + "You enter the code '694' and collect the treasure!\n"
+                         +  "                 _.--.\n"+
+                            "             _.-'_:-'||\n"+
+                            "         _.-'_.-::::'||\n"+
+                            "    _.-:'_.-::::::'  ||\n"+
+                            "  .'`-.-:::::::'     ||\n"+
+                            " /.'`;|:::::::'      ||_\n"+
+                            " ||  ||::::::'      _.;._'-._\n"+
+                            " ||  ||:::::'   _.-!oo @.!-._'-.\n"+
+                            " \'. ||:::::.-!() oo @!()@.-'_.||\n"+
+                            "  '.'-;|:.-'.&$@.& ()$%-'o.'\\U||\n"+
+                            "    `>'-.!@%()@'@_%-'_.-o _.|'||\n"+
+                            "     ||-._'-.@.-'_.-' _.-o  |'||\n"+
+                            "     ||=[ '-._.-\\U/.-'    o |'||\n"+
+                            "     || '-.]=|| |'|       o |'||\n"+
+                            "     ||      || |'|        _| ';\n"+
+                            "     ||      || |'|    _.-'_.-'\n"+
+                            "     |'-._   || |'|_.-'_.-'\n"+
+                            "     '-._'-.|| |' `_.-'\n"+
+                            "          '-.||_/.-'\n")
                 },
                 
             //rad 1 med kolumner
@@ -36,7 +57,7 @@ public class Dungeon {
                 new Room("Room D", "As soon as you enter you notice the light peaking through the cracks of a door infront of you, North.\n"
                          + "'Could that be the exit out of here' you think to yourself.\n"
                          + "You also take notice of the door going East, and the horrid smell that is coming from that direction.\n"
-                         + "Write a 'N' to take the door going North or 'E' to take the door going East"),
+                         + "You can move north [n], east [e] or south [s]"),
         
                 null, 
         
@@ -46,7 +67,7 @@ public class Dungeon {
                          + "You notice a piece of paper laying next to the corpse. 'Code for the chest is 694' the paper reads.\n"
                          + "You also notice a loud snoring sound coming from behind a door going North.\n"
                          + "There is also a door going South and the door going back West where you came from.\n"
-                         + "Write a 'N' to take the door going North, 'S' to take the door going South, or 'W' to take the door going West.")
+                         + "You can move north [n], south [s] or west [w]")
                 },
     
             //rad 2 med kolumner
@@ -55,18 +76,18 @@ public class Dungeon {
                          + "However, there seems to be some kind of scratching noise coming from the walls.\n"
                          + "Must be rats you think to yourself.\n"
                          + "There appears to be a door leading North\n"
-                         + "Write a 'N' to take the door going North or 'E' to take the door going East"),
+                         + "You can move north [n] or east [e]"),
         
                 new Room("Room A", "It is very dark but you can just barely\n"
                          + "see the outline of a door to your left and a door to your right.\n"
                          + "You can decide to go through the West door or the East door,\n"
-                         + "Write a 'W' to take the West door or 'E' to take the East door"),
+                         + "You can move west [w] or east [e]"),
         
                 new Room("Room B", "As you enter the room you vaguely start to smell something horrid.\n"
                          + "The smell is not coming from this room you realize.\n"
                          + "You look around and notice the room is filled with spider webs everywhere.\n"
                          + "You notice a door going North. You can either take that door or go back where you came from.\n"
-                         + "Write a 'N' to take the door going North or 'W' to take the door going West")
+                         + "You can move north [n] or west [w]")
                 }
         };
         
@@ -78,10 +99,11 @@ public class Dungeon {
     // Startar spelet
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Welocme!");
+        
+        Player.PlayerName();
         System.out.println("Use n (north), w (west), e (east), s (south) to move.");
         System.out.println("You start in: " + dungeon[playerX][playerY].getName());
+        System.out.println();
         System.out.println(dungeon[playerX][playerY].getDescription());
 
        /* while (true) {
