@@ -4,19 +4,20 @@ package dragontreasure;
 
 public class Door {
     
-     char position;
-     boolean locked;
+     String position;
+     boolean unLocked; 
      
      
-    public Door(char position, boolean locked){
+    public Door(String position, boolean unLocked){
         
         this.position = position;
        
     }
-    public char getPosition() {
+    public String getPosition() {
         return position;
     }
     public boolean getLocked() {
-        return locked;
+        unLocked = true;
+        return unLocked;
     }
 }
