@@ -1,17 +1,12 @@
 
 package dragontreasure;
 
+public class DragonTreasure {
 
-
-public class Dragontreasure {
-
-   
+    
     public static void main(String[] args) {
-     
-       Dungeon.setupgame();
-        Dungeon.welcomeMessage();
-            
-
+        Dungeon game = new Dungeon();
+        game.start(); // Startar spelet
         
     }
     
