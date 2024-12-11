@@ -11,8 +11,7 @@ public class Dungeon {
 
     
     private Door[][] doorLock;
-    private int doorX;
-    private int doorY;
+    
     // Konstruktor
     
     public Dungeon() {
@@ -40,7 +39,7 @@ public class Dungeon {
                 
                 null,
 
-                new Door("west and south", true)
+                new Door("north, south and west", true)
 
                 
             },
@@ -137,9 +136,8 @@ public class Dungeon {
         playerX = 2;
         playerY = 1;
         
-        // Dörr startposition, rum A. i Sync med spelarens position
-        doorX = playerX;
-        doorY = playerY;
+        
+        
     }
     
     // Startar spelet
@@ -151,7 +149,7 @@ public class Dungeon {
         System.out.println("You start in: " + dungeon[playerX][playerY].getName());
         System.out.println();
         System.out.println();
-        System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() + " Door is unlocked, " + doorLock[doorX][doorY].getLocked());
+        System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[playerX][playerY].getPosition() + " Door is unlocked, " + doorLock[playerX][playerY].getLocked());
           
         //loopar spelet så man kan fortsätta gå tills man hamnar på exit 
         while (true) {
@@ -163,10 +161,6 @@ public class Dungeon {
                 
                 //förlfyttar spelaren uppåt så länge man inte är högst upp
                 case "n":
-                    if ((playerX == 2 && playerY == 1)|| (playerX == 0 && playerY == 2)){
-                        System.out.println("You cant go north");
-                        break;
-                    }
                     if (playerX > 0) playerX--; 
                     else System.out.println("You cant go north.");
                     break;
@@ -202,7 +196,7 @@ public class Dungeon {
                     System.out.println("error. use n, w, e, or s."); 
             }
 
-            System.out.println("you are now in : " + dungeon[playerX][playerY].getName() + "\n");
+            System.out.println("you are now in : " + dungeon[playerX][playerY].getName() + "\nThe " + doorLock[playerX][playerY].getPosition() + " Door is unlocked, " + doorLock[playerX][playerY].getLocked() + "\n");
             System.out.println(dungeon[playerX][playerY].getDescription());
             
             //läser av vart i "grid" man är, är rummet = Exit -> break
