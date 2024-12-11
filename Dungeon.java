@@ -90,7 +90,8 @@ public class Dungeon {
                             "     ||      || |'|    _.-'_.-'\n"+
                             "     |'-._   || |'|_.-'_.-'\n"+
                             "     '-._'-.|| |' `_.-'\n"+
-                            "          '-.||_/.-'\n")
+                            "          '-.||_/.-'\n"
+                          + "You can move south [s]")
                 },
                 
             //rad 1 med kolumner
