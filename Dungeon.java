@@ -196,7 +196,7 @@ public class Dungeon {
                     System.out.println("error. use n, w, e, or s."); 
             }
 
-            System.out.println("you are now in : " + dungeon[playerX][playerY].getName() + "\nThe " + doorLock[playerX][playerY].getPosition() + " Door is unlocked, " + doorLock[playerX][playerY].getLocked() + "\n");
+            System.out.println("You went: " + direction + "\nThe " + doorLock[playerX][playerY].getPosition() + " Door is unlocked, " + doorLock[playerX][playerY].getLocked() + "\n");
             System.out.println(dungeon[playerX][playerY].getDescription());
             
             //läser av vart i "grid" man är, är rummet = Exit -> break
