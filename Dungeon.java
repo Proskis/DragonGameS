@@ -192,6 +192,10 @@ public class Dungeon {
                 case "w":
                     if (playerX == 1 && playerY == 2) { //hoppar över array [1][1] då den är null
                         playerY = 0;
+                        System.out.println("\nYou went west\n");
+                        System.out.println(dungeon[playerX][playerY].getDescription());
+                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
+                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
                         break;
                     }
                     if (playerX == 0 && playerY ==  2){
@@ -212,6 +216,10 @@ public class Dungeon {
                 case "e":
                     if (playerX == 1 && playerY == 0) { //hoppar över array [1][1] då den är null
                         playerY = 2;
+                        System.out.println("\nYou went East\n");
+                        System.out.println(dungeon[playerX][playerY].getDescription());
+                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
+                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
                         break;
                     }
                     if (playerY < dungeon[playerX].length - 1){
