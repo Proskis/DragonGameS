@@ -208,4 +208,10 @@ public class Dungeon {
 
         scanner.close(); // stänger scanner
     }
+     public void endGame(){
+       
+        System.out.println("The game has ended. Thanks for playing");
+       
+        System.exit(0); // Avslutar spelet
+}
 }
