@@ -8,7 +8,8 @@ public class Door {
      boolean unLocked; 
      
      
-    public Door(String position, boolean unLocked){
+     //metod för att hämta dörrens position (vart den leder) samt ifall dörren är upplåst
+    public Door(String position, boolean unLocked){ 
         
         this.position = position;
        
