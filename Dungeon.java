@@ -1,4 +1,3 @@
-
 package dragontreasure;
 
 import java.util.Scanner;
@@ -62,7 +61,7 @@ public class Dungeon {
             
             //rad 0 med kolumner
                 {
-                new Room("Exit (g)", "You escape the dungeon and make it outside. \n"
+                new Room("Exit", "You escape the dungeon and make it outside. \n"
                          + "You're free and can enjoy a breath of fresh air"),
         
                 null,
@@ -152,45 +151,61 @@ public class Dungeon {
         System.out.println();
         System.out.println();
         System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() + " Door is unlocked, " + doorLock[doorX][doorY].getLocked());
-       
-        
-       
-        
-
-       /* while (true) {
+          
+        //loopar spelet så man kan fortsätta gå tills man hamnar på exit 
+        while (true) {
             System.out.print("\nWhere do you want to go? ");
             String direction = scanner.nextLine().toLowerCase();
 
+            // beroende på vilken vägriktning man går så förflyttas man således
             switch (direction) {
+                
+                //förlfyttar spelaren uppåt så länge man inte är högst upp
                 case "n":
-                    if (playerX > 0) playerX--;
+                    if (playerX > 0) playerX--; 
                     else System.out.println("You cant go north.");
                     break;
+                    
+                    //förflyttar spelaren ner så länge man inte är längst ner
                 case "s":
-                    if (playerX < dungeon.length - 1) playerX++;
+                    if (playerX < dungeon.length - 1) playerX++; 
                     else System.out.println("You cant go south.");
                     break;
+                    
+                    // förflyttar spelaren väst "vänster" så länge man inte är mest åt vänster
                 case "w":
-                    if (playerY > 0) playerY--;
+                    if (playerX == 1 && playerY == 2) { //hoppar över array [1][1] då den är null
+                        playerY = 0;
+                        break;
+                    }
+                    if (playerY > 0) playerY--; 
                     else System.out.println("You cant go west.");
                     break;
+                    
+                    // förflyttar spelaren öst "höger" så länge man inte är mest åt höger
                 case "e":
-                    if (playerY < dungeon[playerX].length - 1) playerY++;
+                    if (playerX == 1 && playerY == 0) { //hoppar över array [1][1] då den är null
+                        playerY = 2;
+                        break;
+                    }
+                    if (playerY < dungeon[playerX].length - 1) playerY++; 
                     else System.out.println("You cant go east.");
                     break;
+                    
+                    // skriver ut att använda korrekt bokstäver
                 default:
-                    System.out.println("error. use n, w, e, or s.");
+                    System.out.println("error. use n, w, e, or s."); 
             }
 
             System.out.println("you are now in : " + dungeon[playerX][playerY].getName());
             System.out.println(dungeon[playerX][playerY].getDescription());
-
-            if (dungeon[playerX][playerY].getName().equals("Exit")) {
-                System.out.println("You left the dungeon");
+            
+            //läser av vart i "grid" man är, är rummet = Exit -> break
+            if (dungeon[playerX][playerY].getName().equals("Exit")) { 
                 break;
             }
-        }*/
+        }
 
-        scanner.close();
+        scanner.close(); // stänger scanner
     }
 }
