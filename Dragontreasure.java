@@ -3,7 +3,7 @@ package dragontreasure;
 
 
 
-public class Dragontreasure {
+public class DragonTreasure {
 
     
     public static void main(String[] args) {
