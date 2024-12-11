@@ -163,6 +163,10 @@ public class Dungeon {
                 
                 //förlfyttar spelaren uppåt så länge man inte är högst upp
                 case "n":
+                    if ((playerX == 2 && playerY == 1)|| (playerX == 0 && playerY == 2)){
+                        System.out.println("You cant go north");
+                        break;
+                    }
                     if (playerX > 0) playerX--; 
                     else System.out.println("You cant go north.");
                     break;
