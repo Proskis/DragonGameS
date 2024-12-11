@@ -10,18 +10,60 @@ public class Dungeon {
     private int playerX;
     private int playerY;
 
+    
+    private Door[][] doorLock;
+    private int doorX;
+    private int doorY;
     // Konstruktor
     
     public Dungeon() {
         // Initialisera dungeonen
-        //hämtar namn och beskrivning av "Room"
         
+        
+      //hämtar dörrar och kollar om dem är låst eller inte
+        doorLock = new Door[][]{
+            
+            //rad 0 med kolumner
+            { 
+                new Door("south", true),
+                
+                null,
+                
+                new Door("south", true)
+                
+                
+            },
+            
+            //rad 1 med kolumner
+            {
+                
+                new Door("east and south",true),
+                
+                null,
+
+                new Door("west and south", true)
+
+                
+            },
+            
+            //rad 2 med kolumner
+            {
+                new Door("north and east", true),
+                
+                new Door("west and east",true),
+                
+                new Door("noth and west", true)
+           
+            }
+        };
+        
+         //hämtar namn och beskrivning av "Room"
         dungeon = new Room[][]{
             
             //rad 0 med kolumner
                 {
                 new Room("Exit (g)", "You escape the dungeon and make it outside. \n"
-                         + "You're free and can enjoy the breath of fresh air"),
+                         + "You're free and can enjoy a breath of fresh air"),
         
                 null,
         
@@ -94,6 +136,10 @@ public class Dungeon {
         //spelarens starposition, rum A
         playerX = 2;
         playerY = 1;
+        
+        // Dörr startposition, rum A. i Sync med spelarens position
+        doorX = playerX;
+        doorY = playerY;
     }
     
     // Startar spelet
@@ -104,7 +150,12 @@ public class Dungeon {
         System.out.println("Use n (north), w (west), e (east), s (south) to move.");
         System.out.println("You start in: " + dungeon[playerX][playerY].getName());
         System.out.println();
-        System.out.println(dungeon[playerX][playerY].getDescription());
+        System.out.println();
+        System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() + " Door is unlocked, " + doorLock[doorX][doorY].getLocked());
+       
+        
+       
+        
 
        /* while (true) {
             System.out.print("\nWhere do you want to go? ");
