@@ -5,6 +5,14 @@ import java.util.Scanner;
 
 public class Dungeon {
     
+    //metod för att beskriva vart man gick och skriva ut rums beskrivning samt dörr status
+    private void roomDoorStatus(String direction) {
+    System.out.println("\nYou went " + direction + "\n");
+    System.out.println(dungeon[playerX][playerY].getDescription());
+    System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
+            " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+}
+    
     private Room[][] dungeon;
     private int playerX;
     private int playerY;
@@ -36,11 +44,11 @@ public class Dungeon {
             //rad 1 med kolumner
             {
                 
-                new Door("east and south",true),
+                new Door("north, east and south",true),
                 
                 null,
 
-                new Door("north, west and south", true)
+                new Door("north, south and west", true)
 
                 
             },
@@ -168,10 +176,7 @@ public class Dungeon {
                     }
                     if (playerX > 0) {
                         playerX--;
-                        System.out.println("\nYou went North.\n");
-                        System.out.println(dungeon[playerX][playerY].getDescription());
-                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
-                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                        roomDoorStatus("North"); //hämtar metod
                     } 
                     else System.out.println("\nYou cant go north.");
                     break;
@@ -180,10 +185,7 @@ public class Dungeon {
                 case "s":
                     if (playerX < dungeon.length - 1){
                         playerX++;
-                        System.out.println("\nYou went south\n");
-                        System.out.println(dungeon[playerX][playerY].getDescription());
-                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
-                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                        roomDoorStatus("South"); //hämtar metod
                     } 
                     else System.out.println("\nYou cant go south.");
                     break;
@@ -192,10 +194,7 @@ public class Dungeon {
                 case "w":
                     if (playerX == 1 && playerY == 2) { //hoppar över array [1][1] då den är null
                         playerY = 0;
-                        System.out.println("\nYou went west\n");
-                        System.out.println(dungeon[playerX][playerY].getDescription());
-                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
-                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                        roomDoorStatus("West"); //hämtar metod
                         break;
                     }
                     if (playerX == 0 && playerY ==  2){
@@ -204,10 +203,7 @@ public class Dungeon {
                     }
                     if (playerY > 0){
                         playerY--;
-                        System.out.println("\nYou went west\n");
-                        System.out.println(dungeon[playerX][playerY].getDescription());
-                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
-                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                        roomDoorStatus("West"); //hämtar metod
                     } 
                     else System.out.println("\nYou cant go west.");
                     break;
@@ -216,18 +212,12 @@ public class Dungeon {
                 case "e":
                     if (playerX == 1 && playerY == 0) { //hoppar över array [1][1] då den är null
                         playerY = 2;
-                        System.out.println("\nYou went East\n");
-                        System.out.println(dungeon[playerX][playerY].getDescription());
-                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
-                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                        roomDoorStatus("East"); //hämtar metod
                         break;
                     }
                     if (playerY < dungeon[playerX].length - 1){
                         playerY++;
-                        System.out.println("\nYou went East\n");
-                        System.out.println(dungeon[playerX][playerY].getDescription());
-                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
-                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                        roomDoorStatus("East"); //hämtar metod
                     } 
                     else System.out.println("\nYou cant go east.");
                     break;
