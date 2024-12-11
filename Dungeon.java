@@ -11,7 +11,8 @@ public class Dungeon {
 
     
     private Door[][] doorLock;
-    
+    private int doorX;
+    private int doorY;
     // Konstruktor
     
     public Dungeon() {
@@ -39,7 +40,7 @@ public class Dungeon {
                 
                 null,
 
-                new Door("north, south and west", true)
+                new Door("north, west and south", true)
 
                 
             },
@@ -50,7 +51,7 @@ public class Dungeon {
                 
                 new Door("west and east",true),
                 
-                new Door("noth and west", true)
+                new Door("north and west", true)
            
             }
         };
@@ -136,8 +137,9 @@ public class Dungeon {
         playerX = 2;
         playerY = 1;
         
-        
-        
+        // Dörr startposition, rum A. i Sync med spelarens position
+        doorX = playerX;
+        doorY = playerY;
     }
     
     // Startar spelet
@@ -145,11 +147,10 @@ public class Dungeon {
         Scanner scanner = new Scanner(System.in);
         
         Player.PlayerName();
-        System.out.println("Use n (north), w (west), e (east), s (south) to move.");
-        System.out.println("You start in: " + dungeon[playerX][playerY].getName());
-        System.out.println();
-        System.out.println();
-        System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[playerX][playerY].getPosition() + " Door is unlocked, " + doorLock[playerX][playerY].getLocked());
+        System.out.println("\nUse n (north), w (west), e (east), s (south) to move.");
+        System.out.println("\nYou enter the dungeon!\n");
+        System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() 
+                + " door is unlocked, " + doorLock[doorX][doorY].getLocked());
           
         //loopar spelet så man kan fortsätta gå tills man hamnar på exit 
         while (true) {
@@ -161,14 +162,30 @@ public class Dungeon {
                 
                 //förlfyttar spelaren uppåt så länge man inte är högst upp
                 case "n":
-                    if (playerX > 0) playerX--; 
-                    else System.out.println("You cant go north.");
+                    if ((playerX == 2 && playerY == 1)){ //gör så man inte kan gå norr på [2][1] då [1][1] är null
+                        System.out.println("\nYou cant go north");
+                        break;
+                    }
+                    if (playerX > 0) {
+                        playerX--;
+                        System.out.println("\nYou went North.\n");
+                        System.out.println(dungeon[playerX][playerY].getDescription());
+                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
+                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                    } 
+                    else System.out.println("\nYou cant go north.");
                     break;
                     
                     //förflyttar spelaren ner så länge man inte är längst ner
                 case "s":
-                    if (playerX < dungeon.length - 1) playerX++; 
-                    else System.out.println("You cant go south.");
+                    if (playerX < dungeon.length - 1){
+                        playerX++;
+                        System.out.println("\nYou went south\n");
+                        System.out.println(dungeon[playerX][playerY].getDescription());
+                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
+                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                    } 
+                    else System.out.println("\nYou cant go south.");
                     break;
                     
                     // förflyttar spelaren väst "vänster" så länge man inte är mest åt vänster
@@ -177,8 +194,18 @@ public class Dungeon {
                         playerY = 0;
                         break;
                     }
-                    if (playerY > 0) playerY--; 
-                    else System.out.println("You cant go west.");
+                    if (playerX == 0 && playerY ==  2){
+                        System.out.println("\nYou cant go West");
+                        break;
+                    }
+                    if (playerY > 0){
+                        playerY--;
+                        System.out.println("\nYou went west\n");
+                        System.out.println(dungeon[playerX][playerY].getDescription());
+                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
+                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                    } 
+                    else System.out.println("\nYou cant go west.");
                     break;
                     
                     // förflyttar spelaren öst "höger" så länge man inte är mest åt höger
@@ -187,17 +214,21 @@ public class Dungeon {
                         playerY = 2;
                         break;
                     }
-                    if (playerY < dungeon[playerX].length - 1) playerY++; 
-                    else System.out.println("You cant go east.");
+                    if (playerY < dungeon[playerX].length - 1){
+                        playerY++;
+                        System.out.println("\nYou went East\n");
+                        System.out.println(dungeon[playerX][playerY].getDescription());
+                        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() + 
+                                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+                    } 
+                    else System.out.println("\nYou cant go east.");
                     break;
                     
                     // skriver ut att använda korrekt bokstäver
                 default:
-                    System.out.println("error. use n, w, e, or s."); 
+                    System.out.println("\nError. Use n, w, e, or s."); 
             }
-
-            System.out.println("You went: " + direction + "\nThe " + doorLock[playerX][playerY].getPosition() + " Door is unlocked, " + doorLock[playerX][playerY].getLocked() + "\n");
-            System.out.println(dungeon[playerX][playerY].getDescription());
+            
             
             //läser av vart i "grid" man är, är rummet = Exit -> break
             if (dungeon[playerX][playerY].getName().equals("Exit")) { 
