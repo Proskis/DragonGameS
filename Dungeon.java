@@ -9,8 +9,11 @@ public class Dungeon {
     private void roomDoorStatus(String direction) {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
-    System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
+    if(!dungeon[playerX][playerY].equals(dungeon[0][0])){
+        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
             " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+    }
+    
 }
     
     private Room[][] dungeon;
