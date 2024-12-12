@@ -15,7 +15,8 @@ public class Dungeon {
     }
     
 }
-    
+
+    //ger variabel till array, spelaren och dörrarna
     private Room[][] dungeon;
     private int playerX;
     private int playerY;
@@ -24,6 +25,7 @@ public class Dungeon {
     private Door[][] doorLock;
     private int doorX;
     private int doorY;
+   
     // Konstruktor
     
     public Dungeon() {
@@ -170,22 +172,26 @@ public class Dungeon {
     // Startar spelet
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        
+
+        //hämtar player metoden
         Player.PlayerName();
+
+        //skriver ut spelinstruktioner och start  beskrivningen
         System.out.println("\nUse n (north), w (west), e (east), s (south) to move.");
         System.out.println("\nYou enter the dungeon!\n");
         System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() 
                 + " door is unlocked, " + doorLock[doorX][doorY].getLocked());
-          
+        
         //loopar spelet så man kan fortsätta gå tills man hamnar på exit 
         while (true) {
             System.out.print("\nWhere do you want to go? ");
             String direction = scanner.nextLine().toLowerCase();
 
             // beroende på vilken vägriktning man går så förflyttas man således
+            // kan man inte gå ut ett håll så stannar man kvar och meddelas att man inte kan gå åt det hållet
             switch (direction) {
                 
-                //förlfyttar spelaren uppåt så länge man inte är högst upp
+                //förlfyttar spelaren uppåt (norr) så länge man inte är högst upp
                 case "n":
                     if ((playerX == 2 && playerY == 1)){ //gör så man inte kan gå norr på [2][1] då [1][1] är null
                         System.out.println("\nYou cant go north");
@@ -198,7 +204,7 @@ public class Dungeon {
                     else System.out.println("\nYou cant go north.");
                     break;
                     
-                    //förflyttar spelaren ner så länge man inte är längst ner
+                    //förflyttar spelaren ner (syd) så länge man inte är längst ner
                 case "s":
                     if (playerX < dungeon.length - 1){
                         playerX++;
@@ -207,7 +213,7 @@ public class Dungeon {
                     else System.out.println("\nYou cant go south.");
                     break;
                     
-                    // förflyttar spelaren väst "vänster" så länge man inte är mest åt vänster
+                    // förflyttar spelaren vänster (väst) så länge man inte är längst åt vänster
                 case "w":
                     if (playerX == 1 && playerY == 2) { //hoppar över array [1][1] då den är null
                         playerY = 0;
@@ -225,7 +231,7 @@ public class Dungeon {
                     else System.out.println("\nYou cant go west.");
                     break;
                     
-                    // förflyttar spelaren öst "höger" så länge man inte är mest åt höger
+                    // förflyttar spelaren höger (öst) så länge man inte är längst åt höger
                 case "e":
                     if (playerX == 1 && playerY == 0) { //hoppar över array [1][1] då den är null
                         playerY = 2;
