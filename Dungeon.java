@@ -253,7 +253,7 @@ public class Dungeon {
 
         scanner.close(); // stänger scanner
     }
-     public void endGame(){
+     public void endGame(){ // Metod för att avsluta spelet
        
         System.out.println("The game has ended. Thanks for playing");
        
