@@ -175,9 +175,9 @@ public class Dungeon {
 
         //hämtar player metoden
         Player.PlayerName();
-
         //skriver ut spelinstruktioner och start  beskrivningen
         System.out.println("\nUse n (north), w (west), e (east), s (south) to move.");
+        System.out.println("\nUse q to quit the game at anytime");
         System.out.println("\nYou enter the dungeon!\n");
         System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() 
                 + " door is unlocked, " + doorLock[doorX][doorY].getLocked());
@@ -245,6 +245,10 @@ public class Dungeon {
                     else System.out.println("\nYou cant go east.");
                     break;
                     
+                    case "q": //hämtar metod för att avsluta spelet
+                        System.out.println("\nYou quit the game."); 
+                        endGame();
+                        
                     // skriver ut att använda korrekt bokstäver
                 default:
                     System.out.println("\nError. Use n, w, e, or s."); 
