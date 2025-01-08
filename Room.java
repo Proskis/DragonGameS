@@ -92,17 +92,18 @@ public class Room {
             System.out.println("You attacked the monster and gave: " + player.getPlayerAttackDamage()+ "damage");
             
             if (monster.getHealth() <= 0) {
-                System.out.println("The monster has been defeated! You have: "+ player.getPlayerHealth()+ " left");
+                System.out.println("The monster has been defeated! You have: "+ player.getPlayerHealth()+ " HP left");
                 break;
             }
 
             // Monstret attackerar
             player.setPlayerHealth(player.getPlayerHealth() - monster.getAttackDamage());
-            System.out.println("The monster attacked you and gave: " + monster.getAttackDamage()+"damage");
+            System.out.println("The monster attacked you and dealt: " + monster.getAttackDamage()+"damage");
             
             if (player.getPlayerHealth() <= 0) {
-                System.out.println("You have been defeated by the monster!");
-                break;
+                System.out.println("You have been defeated by the monster!\n GAME OVER");
+               
+                 System.exit(0); // Avslutar spelet  
             }
         }
     }
@@ -110,4 +111,3 @@ public class Room {
 
     
     
-
