@@ -9,13 +9,33 @@ public class Dungeon {
     private void roomDoorStatus(String direction) {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
+    if (playerX == 1 && playerY == 2 && roomEVisit == false){
+                        Potion.getPotion();
+                        roomEVisit = true;
+                        PotionPickedup = true;
+    }
+         if (playerX == 2 && playerY == 0 && roomCVisit == false){
+                       Weapon.getSword(); 
+                        roomCVisit = true;
+                        SwordPickedup = true;  
+}
+         if (playerX == 2 && playerY == 2 && roomBVisit == false){
+                       Key.getKey();
+                        roomBVisit = true;
+                        KeyPickedup = true;  
+}
+         if (playerX == 0 && playerY == 2 && roomFVisit == false){
+                       Treasure.getTreasure();
+                        roomFVisit = true;
+                        TreasurePickedup = true;  
+}
     if(!dungeon[playerX][playerY].equals(dungeon[0][0])){
         System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
             " door is unlocked, " + doorLock[playerX][playerY].getLocked());
-    }
     
-}
-
+    
+    }
+    }
     //ger variabel till array, spelaren och dörrarna
     private Room[][] dungeon;
     private int playerX;
@@ -25,7 +45,18 @@ public class Dungeon {
     private Door[][] doorLock;
     private int doorX;
     private int doorY;
-   
+    
+    private boolean roomBVisit;
+    private boolean roomEVisit;
+    private boolean roomCVisit;
+    private boolean roomFVisit; 
+    
+    private boolean TreasurePickedup;
+    private boolean KeyPickedup;
+    private boolean SwordPickedup; 
+    private boolean PotionPickedup;
+    
+    
     // Konstruktor
     
     public Dungeon() {
@@ -70,6 +101,7 @@ public class Dungeon {
         };
         
         dungeon = Room.getAllRooms(); // Hämtar alla rummen från Room-klassen
+        
         playerX = 2; // Startposition
         playerY = 1;
         
@@ -80,6 +112,18 @@ public class Dungeon {
         // Dörr startposition, rum A. i Sync med spelarens position
         doorX = playerX;
         doorY = playerY;
+        
+        
+        SwordPickedup = false; 
+        TreasurePickedup = false;
+        KeyPickedup = false;
+        PotionPickedup = false;
+        roomBVisit = false;
+        roomCVisit = false;
+        roomEVisit = false;
+        roomFVisit = false;
+        
+        
     }
     
     // Startar spelet
@@ -161,6 +205,19 @@ public class Dungeon {
                     case "q": //hämtar metod för att avsluta spelet
                         System.out.println("\nYou quit the game."); 
                         endGame();
+                        
+                        case "hp":
+                            if (PotionPickedup == true){
+                              System.out.println("Succes");
+                              
+                                // PLAYER HP + 80...
+                                       PotionPickedup = false;
+        
+                                break;
+                                
+                            }
+                            else System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
+                    break;
                         
                     // skriver ut att använda korrekt bokstäver
                 default:
