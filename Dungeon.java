@@ -10,33 +10,37 @@ public class Dungeon {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
     Player player = new Player(20,1);
-    
-        if (playerX == 1 && playerY == 2 && roomEVisit == false){
+   
+        if (playerX == 1 && playerY == 2 && PotionPickedup == false){
                         Potion.getPotion();
+                         System.out.println("Pickup [p] the Potion to add it to your inventory");
                         roomEVisit = true;
-                        PotionPickedup = true;
+                        
         }
-        if (playerX == 2 && playerY == 0 && roomCVisit == false){
+        if (playerX == 2 && playerY == 0 && SwordPickedup == false ){
                        Weapon.getSword(); 
+                        System.out.println("Pickup [p] the Sword to add it to your inventory");
                         roomCVisit = true;
-                        SwordPickedup = true;  
+                         
         }
-        if (playerX == 2 && playerY == 2 && roomBVisit == false){
+        if (playerX == 2 && playerY == 2 && KeyPickedup == false){
                        Key.getKey();
+                       System.out.println("Pickup [p] the key to add it to your inventory");
                         roomBVisit = true;
-                        KeyPickedup = true;  
+                          
         }
         if (playerX == 0 && playerY == 0 && dragonDefeat == true){
                        Treasure.getTreasure();
                         TreasurePickedup = true;  
+       
         }
-        if(!dungeon[playerX][playerY].equals(dungeon[0][0])){
-            System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
-                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+         if(playerX == 1 && playerY == 2){
+           System.out.println("\nThe " + doorLock[1][2].getPosition()
+                + " door appears to be locked");
+           
         }
-        
         if(playerX == 1 && playerY == 0 && roomDVisit == false){
-            Monster monster = new Monster(8, 1);  // skapar ett mosnter
+            Monster monster = new Monster(8, 1);  // skapar ett monster
             monster.displayInfo();
             Room.doBattle(player, monster);
             roomDVisit = true;
@@ -51,10 +55,9 @@ public class Dungeon {
             roomFVisit = true;
             dragonDefeat = true;
         }
-    }
+        }
+        
       
-    
-    
     //ger variabel till array, spelaren och dörrarna
     private Room[][] dungeon;
     private int playerX;
@@ -76,6 +79,7 @@ public class Dungeon {
     private boolean KeyPickedup;
     private boolean SwordPickedup; 
     private boolean PotionPickedup;
+    private boolean UsedPotion;
     
     private boolean monsterDefeat;
     private boolean dragonDefeat;
@@ -86,45 +90,8 @@ public class Dungeon {
     public Dungeon() {
         // Initialisera dungeonen
         
-        
-      //hämtar dörrar och kollar om dem är låst eller inte
-        doorLock = new Door[][]{
-            
-            //rad 0 med kolumner
-            { 
-                new Door("south", true),
-                
-                null,
-                
-                new Door("south", true)
-                
-                
-            },
-            
-            //rad 1 med kolumner
-            {
-                
-                new Door("north, east and south",true),
-                
-                null,
-
-                new Door("north, south and west", true)
-
-                
-            },
-            
-            //rad 2 med kolumner
-            {
-                new Door("north and east", true),
-                
-                new Door("west and east",true),
-                
-                new Door("north and west", true)
-           
-            }
-        };
-        
         dungeon = Room.getAllRooms(); // Hämtar alla rummen från Room-klassen
+        doorLock = Door.getAllDoors();// Hämtar alla dörrar från Door-klassen
         
         //spelarens starposition, rum A
         playerX = 2;
@@ -138,6 +105,7 @@ public class Dungeon {
         TreasurePickedup = false;
         KeyPickedup = false;
         PotionPickedup = false;
+        UsedPotion = false;
         
         monsterDefeat = false;
         dragonDefeat = false;
@@ -163,12 +131,12 @@ public class Dungeon {
         System.out.println("\nUse n (north), w (west), e (east), s (south) to move.");
         System.out.println("\nUse q to quit the game at anytime");
         System.out.println("\nYou enter the dungeon!\n");
-        System.out.println(dungeon[playerX][playerY].getDescription() + "\nThe " + doorLock[doorX][doorY].getPosition() 
-                + " door is unlocked, " + doorLock[doorX][doorY].getLocked());
         
+           System.out.println(dungeon[playerX][playerY].getDescription()); 
+ 
         //loopar spelet så man kan fortsätta gå tills man hamnar på exit 
         while (true) {
-            System.out.print("\nWhere do you want to go? ");
+            System.out.print("\nWhat's your next action? ");
             String direction = scanner.nextLine().toLowerCase();
 
             // beroende på vilken vägriktning man går så förflyttas man således
@@ -180,7 +148,20 @@ public class Dungeon {
                     if ((playerX == 2 && playerY == 1)){ //gör så man inte kan gå norr på [2][1] då [1][1] är null
                         System.out.println("\nYou cant go north");
                         break;
+                     }
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == true){
+                        playerX--;
+                        doorLock[1][2].getLocked();
+                        roomDoorStatus("North"); //hämtar metod
+                        break;
                     }
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == false){
+                        doorLock[1][2].getLocked();
+                         System.out.println("\nThe door going north seems to be locked\n" +
+                                 "Maybe a key could open it.");
+                        
+                        break;
+                        }
                     if (playerX > 0) {
                         playerX--;
                         roomDoorStatus("North"); //hämtar metod
@@ -229,28 +210,54 @@ public class Dungeon {
                     else System.out.println("\nYou cant go east.");
                     break;
                 
-                case "q": //hämtar metod för att avsluta spelet
-                        System.out.println("\nYou quit the game."); 
-                        endGame();
-                 
+                    // plockar upp Item ifall spelaren är i rätt rum och inte redan har plockat upp Item.
+                case "p": 
+                    if(playerX == 2 && playerY == 0 && SwordPickedup == false){
+                      System.out.println("You picked up a Sword" );
+                    SwordPickedup = true;
+                    
+                          break;
+                    }
+                    if(playerX == 1 && playerY == 2 && PotionPickedup == false && UsedPotion == false){
+                        System.out.println("You picked up a Potion");
+                    PotionPickedup = true;     
+                          break;
+                     }
+                    if(playerX == 2 && playerY == 2 && KeyPickedup == false){
+                        System.out.println("You picked up a Key");
+                    KeyPickedup = true;     
+                          break;
+                    }
+                  else
+                        System.out.println("\nThere is nothing to pickup here.");
+                    break;
+                    
+                   // Använder föremålet HealthPotion ifall spelaren har plockat upp den   
                 case "hp":
-                     if (PotionPickedup == true){
+                     if (PotionPickedup == true && UsedPotion == false){
                          System.out.println("Succes");
                          // PLAYER HP + 80...
+                         UsedPotion = true;
                          PotionPickedup = false;
                          
                          break;
                      }
-                     
-                     else System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
-                     break;
-                     
+                     if (PotionPickedup == false){
+                         System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
+                         break;
+                     }
+                case "I":
+                    if (PotionPickedup == true){
+                        
+                     }
+                     case "q": //hämtar metod för att avsluta spelet
+                        System.out.println("\nYou quit the game."); 
+                        endGame();
                         
                     // skriver ut att använda korrekt bokstäver
                 default:
                     System.out.println("\nError. Use n, w, e, or s."); 
             }
-            
             
             //läser av vart i "grid" man är, är rummet = Exit -> break
             if (dungeon[playerX][playerY].getName().equals("Exit")) { 
