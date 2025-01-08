@@ -36,7 +36,9 @@ public class Room {
                            "|| To get to the treasure you have to move cautiously to not wake the dragon up.             ||\n"+
                            "|| There appears to be a padlock with a 3 digit code on the treasure chest.                  ||\n"+
                            "|| You enter the code '694' and collect the treasure!                                        ||\n"+
-                           "===============================================================================================")
+                           "==============================================================================================="
+                        
+                )
             },
             {
                 new Room("Room D", "================================================================================================================\n"
@@ -80,4 +82,32 @@ public class Room {
             }
         };
     }
+    
+    public static void doBattle(Player player, Monster monster) {
+        
+        // Loop som körs tills en av parterna har 0 eller lägre i hälsa
+        while (player.getPlayerHealth() > 0 && monster.getHealth() > 0) {
+            // Spelaren attackerar först
+            monster.setHealth(monster.getHealth() - player.getPlayerAttackDamage());
+            System.out.println("You attacked the monster and gave: " + player.getPlayerAttackDamage()+ "damage");
+            
+            if (monster.getHealth() <= 0) {
+                System.out.println("The monster has been defeated! You have: "+ player.getPlayerHealth()+ " left");
+                break;
+            }
+
+            // Monstret attackerar
+            player.setPlayerHealth(player.getPlayerHealth() - monster.getAttackDamage());
+            System.out.println("The monster attacked you and gave: " + monster.getAttackDamage()+"damage");
+            
+            if (player.getPlayerHealth() <= 0) {
+                System.out.println("You have been defeated by the monster!");
+                break;
+            }
+        }
+    }
 }
+
+    
+    
+
