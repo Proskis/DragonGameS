@@ -9,33 +9,52 @@ public class Dungeon {
     private void roomDoorStatus(String direction) {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
-    if (playerX == 1 && playerY == 2 && roomEVisit == false){
+    Player player = new Player(20,1);
+    
+        if (playerX == 1 && playerY == 2 && roomEVisit == false){
                         Potion.getPotion();
                         roomEVisit = true;
                         PotionPickedup = true;
-    }
-         if (playerX == 2 && playerY == 0 && roomCVisit == false){
+        }
+        if (playerX == 2 && playerY == 0 && roomCVisit == false){
                        Weapon.getSword(); 
                         roomCVisit = true;
                         SwordPickedup = true;  
-}
-         if (playerX == 2 && playerY == 2 && roomBVisit == false){
+        }
+        if (playerX == 2 && playerY == 2 && roomBVisit == false){
                        Key.getKey();
                         roomBVisit = true;
                         KeyPickedup = true;  
-}
-         if (playerX == 0 && playerY == 2 && roomFVisit == false){
+        }
+        if (playerX == 0 && playerY == 0 && dragonDefeat == true){
                        Treasure.getTreasure();
-                        roomFVisit = true;
                         TreasurePickedup = true;  
-}
-    if(!dungeon[playerX][playerY].equals(dungeon[0][0])){
-        System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
-            " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+        }
+        if(!dungeon[playerX][playerY].equals(dungeon[0][0])){
+            System.out.println("\nThe " + doorLock[playerX][playerY].getPosition() +
+                " door is unlocked, " + doorLock[playerX][playerY].getLocked());
+        }
+        
+        if(playerX == 1 && playerY == 0 && roomDVisit == false){
+            Monster monster = new Monster(8, 1);  // skapar ett mosnter
+            monster.displayInfo();
+            Room.doBattle(player, monster);
+            roomDVisit = true;
+            monsterDefeat = true;
+            
+        }
+        
+        if(playerX == 0 && playerY == 2 && roomFVisit == false){
+            Dragon dragon = new Dragon(18, 2);  // Skapa en drake
+            dragon.displayInfo();
+            Room.doBattle(player, dragon);
+            roomFVisit = true;
+            dragonDefeat = true;
+        }
+    }
+      
     
     
-    }
-    }
     //ger variabel till array, spelaren och dörrarna
     private Room[][] dungeon;
     private int playerX;
@@ -46,15 +65,20 @@ public class Dungeon {
     private int doorX;
     private int doorY;
     
+    private boolean roomAVisit;
     private boolean roomBVisit;
-    private boolean roomEVisit;
     private boolean roomCVisit;
+    private boolean roomDVisit;
+    private boolean roomEVisit;
     private boolean roomFVisit; 
     
     private boolean TreasurePickedup;
     private boolean KeyPickedup;
     private boolean SwordPickedup; 
     private boolean PotionPickedup;
+    
+    private boolean monsterDefeat;
+    private boolean dragonDefeat;
     
     
     // Konstruktor
@@ -102,9 +126,6 @@ public class Dungeon {
         
         dungeon = Room.getAllRooms(); // Hämtar alla rummen från Room-klassen
         
-        playerX = 2; // Startposition
-        playerY = 1;
-        
         //spelarens starposition, rum A
         playerX = 2;
         playerY = 1;
@@ -113,13 +134,18 @@ public class Dungeon {
         doorX = playerX;
         doorY = playerY;
         
-        
         SwordPickedup = false; 
         TreasurePickedup = false;
         KeyPickedup = false;
         PotionPickedup = false;
+        
+        monsterDefeat = false;
+        dragonDefeat = false;
+        
+        roomAVisit = false;
         roomBVisit = false;
         roomCVisit = false;
+        roomDVisit = false;
         roomEVisit = false;
         roomFVisit = false;
         
@@ -132,6 +158,7 @@ public class Dungeon {
 
         //hämtar player metoden
         Player.PlayerName();
+        
         //skriver ut spelinstruktioner och start  beskrivningen
         System.out.println("\nUse n (north), w (west), e (east), s (south) to move.");
         System.out.println("\nUse q to quit the game at anytime");
@@ -201,23 +228,23 @@ public class Dungeon {
                     } 
                     else System.out.println("\nYou cant go east.");
                     break;
-                    
-                    case "q": //hämtar metod för att avsluta spelet
+                
+                case "q": //hämtar metod för att avsluta spelet
                         System.out.println("\nYou quit the game."); 
                         endGame();
-                        
-                        case "hp":
-                            if (PotionPickedup == true){
-                              System.out.println("Succes");
-                              
-                                // PLAYER HP + 80...
-                                       PotionPickedup = false;
-        
-                                break;
-                                
-                            }
-                            else System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
-                    break;
+                 
+                case "hp":
+                     if (PotionPickedup == true){
+                         System.out.println("Succes");
+                         // PLAYER HP + 80...
+                         PotionPickedup = false;
+                         
+                         break;
+                     }
+                     
+                     else System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
+                     break;
+                     
                         
                     // skriver ut att använda korrekt bokstäver
                 default:
