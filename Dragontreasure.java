@@ -1,7 +1,10 @@
 
 package dragontreasure;
 
-
+/*    
+author
+Viktor Kruukka & William Visscher
+*/
 
 public class DragonTreasure {
 
