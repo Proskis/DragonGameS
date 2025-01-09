@@ -45,15 +45,16 @@ public class Dungeon {
            System.out.println("\nThe " + doorLock[1][2].getPosition()
                 + " door appears to be locked");
         }
-        // If-sats, Om alla krav stämmer så hämtas skrivs ut att dörren är låst men kan öppnas med nyckeln
+        // If-sats, Om alla krav stämmer så skrivs det ut att dörren är låst men kan öppnas med nyckeln
          if (playerX == 1 && playerY == 2 && KeyPickedup == true) {
             System.out.println("\nThe " + doorLock[1][2].getPosition()
                 + " door appears to be locked\n" +
                     "Use [u] to use the key and unlock the door");
         
         }
-        if(playerX == 1 && playerY == 0 && roomDVisit == false){
-            Monster monster = new Monster(8, 1);  // skapar ett mosnter
+        
+        if(playerX == 1 && playerY == 0 && roomDVisit == false){ // Om spelaren är i korrekt rum och inte har varit där tidigare
+            Monster monster = new Monster(8, 1);  // skapar ett monster
             monster.displayInfo(); //hämtar monster info
             
             boolean battle = Room.doBattle(player, monster); //sätter battle till samma värde som doBattle
@@ -177,7 +178,7 @@ public class Dungeon {
                         System.out.println("\nYou cant go north");
                         break;
                     }
-                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){ // Ifall spelaren är 
                        System.out.println("\nThe door going north seems to be locked\n" +
                                  "Maybe a key could open it.");
                        
