@@ -7,7 +7,7 @@ public class Player extends Monster {
     
     public Player(int health, int attackDamage) {
         
-        super(health, attackDamage);
+        super(health, attackDamage); //tar health och attackDamage setter/getter från Monster
     }
     
      public static void PlayerName(){ // metod för att samla spelarens namn och skriva ut ett välkomst meddelande
