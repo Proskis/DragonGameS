@@ -83,7 +83,7 @@ public class Room {
         };
     }
     
-    public static void doBattle(Player player, Monster monster) {
+    public static boolean doBattle(Player player, Monster monster) {
         
         // Loop som körs tills en av parterna har 0 eller lägre i hälsa
         while (player.getPlayerHealth() > 0 && monster.getHealth() > 0) {
@@ -93,7 +93,7 @@ public class Room {
             
             if (monster.getHealth() <= 0) {
                 System.out.println("The monster has been defeated! You have: "+ player.getPlayerHealth()+ " HP left");
-                break;
+                return true;
             }
 
             // Monstret attackerar
@@ -102,10 +102,11 @@ public class Room {
             
             if (player.getPlayerHealth() <= 0) {
                 System.out.println("You have been defeated by the monster!\n GAME OVER");
-               
-                 System.exit(0); // Avslutar spelet  
+                return false;
+                   
             }
         }
+        return false;
     }
 }
 
