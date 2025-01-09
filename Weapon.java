@@ -20,7 +20,7 @@ package dragontreasure;
     public void setDamage(int Damage){
         this.Damage = Damage;
     }
-
+  // Metod för att skapa ett nytt objekt sword samt skriver ut objektet
  public static void getSword(){
        Item sword = new Weapon("Sword","A Iron sword meant for killing monsters that Deals ",  " \n" +
                 "========================================\n" +
