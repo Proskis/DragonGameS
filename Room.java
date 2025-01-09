@@ -91,7 +91,8 @@ public class Room {
             // Spelaren attackerar först
             monster.setHealth(monster.getHealth() - player.getAttackDamage());
             System.out.println("You attacked the monster and dealt: " + player.getAttackDamage()+ " damage");
-            
+
+            // if-sats. ifall monstret dör först i doBattle så returneras 'true'
             if (monster.getHealth() <= 0) {
                 System.out.println("The monster has been defeated! You have: "+ player.getHealth()+ " HP left");
                 return true;
@@ -100,7 +101,8 @@ public class Room {
             // Monstret attackerar
             player.setHealth(player.getHealth() - monster.getAttackDamage());
             System.out.println("The monster attacked you and dealt: " + monster.getAttackDamage()+" damage");
-            
+
+            // if-sats. ifall player dör först i doBattle så returneras 'false'
             if (player.getHealth() <= 0) {
                 System.out.println("You have been defeated by the monster!");
                 return false;
