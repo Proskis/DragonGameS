@@ -6,12 +6,14 @@ import java.util.Scanner;
 public class Dungeon {
     public int PlayerDamage = 1;
     public int PlayerHealth = 20;
+    
     //metod för att beskriva vart man gick och skriva ut rums beskrivning
     private void roomDoorStatus(String direction) {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
     Player player = new Player(PlayerHealth,PlayerDamage);
-   
+
+        
         if (playerX == 1 && playerY == 2 && PotionPickedup == false && UsedPotion == false){
                         Potion.getPotion();
                          System.out.println("Pickup [p] the Potion to add it to your inventory");
@@ -47,14 +49,15 @@ public class Dungeon {
         }
         if(playerX == 1 && playerY == 0 && roomDVisit == false){
             Monster monster = new Monster(8, 1);  // skapar ett mosnter
-            monster.displayInfo();
+            monster.displayInfo(); //hämtar monster info
             
-            boolean battle = Room.doBattle(player, monster);
+            boolean battle = Room.doBattle(player, monster); //sätter battle till samma värde som doBattle
             
-            if(!battle){
+            if(!battle){ // om fighten returnerar false (spelaren förlorar) avslutas spelet
                System.out.println("Game over!");
                System.exit(0); 
             }
+            //uppdaterar värden på variablerna efter man besökt rummet och vunnit mot monstret
             roomDVisit = true;
             monsterDefeat = true;
             
@@ -62,14 +65,15 @@ public class Dungeon {
         
         if(playerX == 0 && playerY == 2 && roomFVisit == false){
             Dragon dragon = new Dragon(18, 2);  // Skapa en drake
-            dragon.displayInfo();
+            dragon.displayInfo(); //hämtar drake info
             
             boolean battleResult = Room.doBattle(player, dragon);
     
-            if (!battleResult) { // Om striden returnerar false (spelaren förlorar)
+            if (!battleResult) { // om fighten returnerar false (spelaren förlorar) avslutas spelet
               System.out.println("Game over!");
-              System.exit(0); // Avslutar programmet
+              System.exit(0);
             }
+            //uppdaterar värden på variablerna efter man besökt rummet och vunnit mot monstret
             roomFVisit = true;
             dragonDefeat = true;
         }
@@ -81,7 +85,6 @@ public class Dungeon {
     private int playerX;
     private int playerY;
 
-    
     private Door[][] doorLock;
     private int doorX;
     private int doorY;
@@ -102,7 +105,7 @@ public class Dungeon {
     private boolean monsterDefeat;
     private boolean dragonDefeat;
     
-   private boolean doorLocked;
+    private boolean doorLocked;
     // Konstruktor
     public Dungeon() {
         // Initialisera dungeonen
