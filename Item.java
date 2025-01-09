@@ -7,7 +7,7 @@ public class Item {
     public String description;
     public String itemPicture;
     
-    //Metod för att hämta namn, beskrivning och en bild på föremålet
+    //Konstruktor för att hämta namn, beskrivning och en bild på föremålet
     public Item(String name, String description, String itemPicture) {
         this.name = name;
         this.description = description;
