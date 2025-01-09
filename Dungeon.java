@@ -177,19 +177,15 @@ public class Dungeon {
                     if ((playerX == 2 && playerY == 1)){ //gör så man inte kan gå norr på [2][1] då [1][1] är null
                         System.out.println("\nYou cant go north");
                         break;
-                    }
-                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){ // Ifall spelaren är 
+                    } 
+                        // Skriver ut att man måste använda en nyckel för att gå norr ifall kraven stämmer
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
                        System.out.println("\nThe door going north seems to be locked\n" +
                                  "Maybe a key could open it.");
                        
                         break;
                      }
-                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
-                        playerX--;
-                        doorLock[1][2].getLocked();
-                        roomDoorStatus("North"); //hämtar metod
-                        break;
-                    }
+                        // Skriver ut att man måste ha en nyckel för att gå norr ifall kraven stämmer
                         if(playerX == 1 && playerY == 2 && KeyPickedup == false && doorLocked == true){
                         doorLock[1][2].getLocked();
                         
@@ -198,10 +194,12 @@ public class Dungeon {
                         
                         break;
                         }
+                        //Flyttar spelaren Norr 
                     if (playerX > 0) {
                         playerX--;
                         roomDoorStatus("North"); //hämtar metod
                     } 
+                    // Om if-satserna ovan inte gäller så skrivs det ut att man inte kan gå norr
                     else System.out.println("\nYou cant go north.");
                     break;
                     
@@ -246,38 +244,40 @@ public class Dungeon {
                     else System.out.println("\nYou cant go east.");
                     break;
                 
-                    // plockar upp Item ifall spelaren är i rätt rum och inte redan har plockat upp Item.
-                case "p": 
+                    
+                case "p": // plockar upp Item ifall spelaren är i rätt rum och inte redan har plockat upp Item. 
                     if(playerX == 2 && playerY == 0 && SwordPickedup == false){
                       System.out.println("You picked up a Sword" );
-                    SwordPickedup = true;
-                    PlayerDamage=2;
+                    SwordPickedup = true; // ändrar variablen till att spelaren har plockat upp svärdet
+                    PlayerDamage=2;       // ändrar PlayerDamage till 2 eftersom spelaren nu har svärdet
                           break;
                     }
                     if(playerX == 1 && playerY == 2 && PotionPickedup == false && UsedPotion == false){
                         System.out.println("\nYou picked up a Potion\n" + 
                                 "Use [hp] to consume the HealthPotion");
-                    PotionPickedup = true;     
+                    PotionPickedup = true;     // ändrar variablen till att spelaren har plockat upp potion
                           break;
                      }
                     if(playerX == 2 && playerY == 2 && KeyPickedup == false){
                         System.out.println("You picked up a Key");
-                    KeyPickedup = true;     
+                    KeyPickedup = true;     // ändrar variablen till att spelaren har plockat upp nyckeln
                           break;
                     }
                   else
+                        // Om spelaren försöker plocka upp något som inte finns så skrivs det ut ett meddelande
                         System.out.println("\nThere is nothing to pickup here.");
                     break;
                     
-                   // Använder föremålet HealthPotion ifall spelaren har plockat upp den   
-                case "hp":
+                   
+                case "hp": // Använder föremålet HealthPotion ifall spelaren har plockat upp den   
                      if (PotionPickedup == true && UsedPotion == false){
-                        PlayerHealth = 20;
-                         UsedPotion = true;
-                         PotionPickedup = false;
+                        PlayerHealth = 20; // Ändrar PlayerHealth till max HP
+                         UsedPotion = true; // ändrar variablen till att spelaren har använt upp potion
+                         PotionPickedup = false; // ändrar variablen till att spelaren inte nå mer har en potion
                          System.out.println("You used a HealthPotion. Current PlayerHealth = " + PlayerHealth);
                          break;
                      }
+                     // skriver ut meddelande om spelaren försöker använda en HealthPotion som inte spelaren har plockat upp
                      if (PotionPickedup == false){
                          System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
                          break;
@@ -287,18 +287,19 @@ public class Dungeon {
                         System.out.println("\nYou quit the game."); 
                         endGame();
             
-                case "u":
+                case "u": // Använder nyckeln för att låsa upp dörren
                     if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
                         
-                        doorLocked = false;
+                        doorLocked = false; // ändrar variablen till att dörren är nu öppen (false)
                         System.out.println("\nYou used a Key to unlock the door");
                         break;
                     }
                     else
-                        System.out.println("\nThere is nothing to be use here");
+                        // Ifall det inte finns någont att använda skrivs ett meddelande ut
+                        System.out.println("\nThere is nothing to use here");
                         break;
         
-                case "m":
+                case "m": // Skriver ut en bild på en map av dungeonens layout
                         System.out.println("Map:\n"
                                          + "=================\n"
                                          + "|| Exit    [*] ||\n"
@@ -310,8 +311,8 @@ public class Dungeon {
                                          + "||    START    ||\n"
                                          + "=================");
                     break;
-                    // skriver ut att använda korrekt bokstäver
-                default:
+                    
+                default:// skriver ut att använda korrekt bokstäver
                     System.out.println("\nError. Use [n], [w], [e], [s] to move.\n"+
                             "Or [p], [hp], [u], [m] to perform a task\n"+
                             "Or [q] to quit the game"); 
