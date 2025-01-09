@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class Dungeon {
     public int PlayerDamage = 1;
     public int PlayerHealth = 20;
-    //metod för att beskriva vart man gick och skriva ut rums beskrivning samt dörr status
+    //metod för att beskriva vart man gick och skriva ut rums beskrivning
     private void roomDoorStatus(String direction) {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
     Player player = new Player(PlayerHealth,PlayerDamage);
    
-        if (playerX == 1 && playerY == 2 && PotionPickedup == false){
+        if (playerX == 1 && playerY == 2 && PotionPickedup == false && UsedPotion == false){
                         Potion.getPotion();
                          System.out.println("Pickup [p] the Potion to add it to your inventory");
                         roomEVisit = true;
@@ -147,6 +147,7 @@ public class Dungeon {
         
         //skriver ut spelinstruktioner och start  beskrivningen
         System.out.println("\nUse n (north), w (west), e (east), s (south) to move.");
+        System.out.println("\nUse m (map) to open a map of the dungeon");
         System.out.println("\nUse q to quit the game at anytime");
         System.out.println("\nYou enter the dungeon!\n");
         
@@ -286,10 +287,23 @@ public class Dungeon {
                     else
                         System.out.println("\nThere is nothing to be use here");
                         break;
+        
+                case "m":
+                        System.out.println("Map:\n"
+                                         + "===============\n"
+                                         + "||Exit    [*]||\n"
+                                         + "|| |       | ||\n"
+                                         + "||[*]-----[ ]||\n"
+                                         + "|| |       | ||\n"
+                                         + "||[ ]-[ ]-[ ]||\n"
+                                         + "||     ^     ||\n"
+                                         + "||   START   ||\n"
+                                         + "===============");
+                    break;
                     // skriver ut att använda korrekt bokstäver
                 default:
                     System.out.println("\nError. Use [n], [w], [e], [s] to move.\n"+
-                            "Or [p], [hp], [u] to perform a task\n"+
+                            "Or [p], [hp], [u], [m] to perform a task\n"+
                             "Or [q] to quit the game"); 
             }
             
