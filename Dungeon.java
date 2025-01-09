@@ -4,12 +4,13 @@ import java.util.Scanner;
 
 
 public class Dungeon {
-    
+    public int PlayerDamage = 1;
+    public int PlayerHealth = 20;
     //metod för att beskriva vart man gick och skriva ut rums beskrivning samt dörr status
     private void roomDoorStatus(String direction) {
     System.out.println("\nYou went " + direction + "\n");
     System.out.println(dungeon[playerX][playerY].getDescription());
-    Player player = new Player(20,1);
+    Player player = new Player(PlayerHealth,PlayerDamage);
    
         if (playerX == 1 && playerY == 2 && PotionPickedup == false){
                         Potion.getPotion();
@@ -239,11 +240,12 @@ public class Dungeon {
                     if(playerX == 2 && playerY == 0 && SwordPickedup == false){
                       System.out.println("You picked up a Sword" );
                     SwordPickedup = true;
-                    
+                    PlayerDamage=2;
                           break;
                     }
                     if(playerX == 1 && playerY == 2 && PotionPickedup == false && UsedPotion == false){
-                        System.out.println("You picked up a Potion");
+                        System.out.println("\nYou picked up a Potion\n" + 
+                                "Use [hp] to consume the HealthPotion");
                     PotionPickedup = true;     
                           break;
                      }
@@ -259,11 +261,10 @@ public class Dungeon {
                    // Använder föremålet HealthPotion ifall spelaren har plockat upp den   
                 case "hp":
                      if (PotionPickedup == true && UsedPotion == false){
-                         System.out.println("Succes");
-                         // PLAYER HP + 80...
+                        PlayerHealth = 20;
                          UsedPotion = true;
                          PotionPickedup = false;
-                         
+                         System.out.println("You used a HealthPotion. Current PlayerHealth = " + PlayerHealth);
                          break;
                      }
                      if (PotionPickedup == false){
