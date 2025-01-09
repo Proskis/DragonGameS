@@ -42,6 +42,6 @@ package dragontreasure;
     //överskriden metod för att beskriva objektet
     @Override
     public String toString(){
-         return "You found the " + name + "! " + description +  goldValue + itemPicture;
+         return "You found the " + name + "! " + description + " Worth: $" + goldValue + itemPicture;
     }
   }
