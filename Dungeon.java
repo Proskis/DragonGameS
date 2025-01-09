@@ -45,12 +45,14 @@ public class Dungeon {
         
         }
         if(playerX == 1 && playerY == 0 && roomDVisit == false){
-            Monster monster = new Monster(8, 5);  // skapar ett mosnter
+            Monster monster = new Monster(8, 1);  // skapar ett mosnter
             monster.displayInfo();
-            Room.doBattle(player, monster);
-            if(!Room.doBattle(player, monster)){
-                System.out.println("Game over!");
-                return;
+            
+            boolean battle = Room.doBattle(player, monster);
+            
+            if(!battle){
+               System.out.println("Game over!");
+               System.exit(0); 
             }
             roomDVisit = true;
             monsterDefeat = true;
@@ -60,10 +62,12 @@ public class Dungeon {
         if(playerX == 0 && playerY == 2 && roomFVisit == false){
             Dragon dragon = new Dragon(18, 2);  // Skapa en drake
             dragon.displayInfo();
-            Room.doBattle(player, dragon);
-            if(!Room.doBattle(player, dragon)){
-                System.out.println("Game over!");
-                return;
+            
+            boolean battleResult = Room.doBattle(player, dragon);
+    
+            if (!battleResult) { // Om striden returnerar false (spelaren förlorar)
+              System.out.println("Game over!");
+              System.exit(0); // Avslutar programmet
             }
             roomFVisit = true;
             dragonDefeat = true;
