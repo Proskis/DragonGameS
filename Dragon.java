@@ -1,14 +1,15 @@
 
 package dragontreasure;
 
+//subklass av Monster
 public class Dragon extends Monster {
     
     public Dragon(int health, int attackDamage) {
         
-        super(health, attackDamage);
+        super(health, attackDamage); //tar health och attackDamage setter/getter från Monster
     }
     
-    //@Override
+    // lägger ut info och bild i egen metod
     public static void displayInfo(){
         System.out.println("                                       \\/\n" +
 "                                       ^`'.\n" +
