@@ -2,6 +2,7 @@
 package dragontreasure;
 import java.util.Scanner;
 
+//då den också har health och attackdamage så gjorde vi subklass av monster istället för repetera samma kod
 public class Player extends Monster {
     
     public Player(int health, int attackDamage) {
