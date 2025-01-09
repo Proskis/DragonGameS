@@ -76,7 +76,7 @@ public class Dungeon {
         }
         
       
-    //ger variabel till array, spelaren och dörrarna
+    //ger variabel till array, spelaren, dörrarna, rummen och alla items och monsters
     private Room[][] dungeon;
     private int playerX;
     private int playerY;
@@ -116,7 +116,8 @@ public class Dungeon {
         // Dörr startposition, rum A. i Sync med spelarens position
         doorX = playerX;
         doorY = playerY;
-        
+
+        //sätter värde på variablerna 
         SwordPickedup = false; 
         TreasurePickedup = false;
         KeyPickedup = false;
