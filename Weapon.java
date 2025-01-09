@@ -39,7 +39,7 @@ package dragontreasure;
                 "||                          `:/ ;     ||\n" +
                 "||                            `'      ||\n" +
                 "========================================\n" 
-               , 200);
+               , 2);
         
         System.out.println(sword);
     }
