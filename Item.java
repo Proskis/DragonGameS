@@ -1,19 +1,19 @@
 
 package dragontreasure;
 
-
+//SuperKlass 'Item' för alla föremål i spelet
 public class Item {
     public String name;
     public String description;
     public String itemPicture;
     
+    //Metod för att hämta namn, beskrivning och en bild på föremålet
     public Item(String name, String description, String itemPicture) {
         this.name = name;
         this.description = description;
         this.itemPicture = itemPicture;
         
     }
-    
     //getter och setter för name
     public String getName() {
         return name;
