@@ -34,10 +34,15 @@ public class Dungeon {
                         TreasurePickedup = true;  
        
         }
-         if(playerX == 1 && playerY == 2){
+         if(playerX == 1 && playerY == 2 && KeyPickedup == false){
            System.out.println("\nThe " + doorLock[1][2].getPosition()
                 + " door appears to be locked");
-           
+        }
+         if (playerX == 1 && playerY == 2 && KeyPickedup == true) {
+            System.out.println("\nThe " + doorLock[1][2].getPosition()
+                + " door appears to be locked\n" +
+                    "Use [u] to use the key and unlock the door");
+        
         }
         if(playerX == 1 && playerY == 0 && roomDVisit == false){
             Monster monster = new Monster(8, 1);  // skapar ett monster
@@ -84,12 +89,10 @@ public class Dungeon {
     private boolean monsterDefeat;
     private boolean dragonDefeat;
     
-    
+   private boolean doorLocked;
     // Konstruktor
-    
     public Dungeon() {
         // Initialisera dungeonen
-        
         dungeon = Room.getAllRooms(); // Hämtar alla rummen från Room-klassen
         doorLock = Door.getAllDoors();// Hämtar alla dörrar från Door-klassen
         
@@ -117,8 +120,10 @@ public class Dungeon {
         roomEVisit = false;
         roomFVisit = false;
         
-        
+        doorLocked = true;
     }
+    
+    
     
     // Startar spelet
     public void start() {
@@ -148,15 +153,22 @@ public class Dungeon {
                     if ((playerX == 2 && playerY == 1)){ //gör så man inte kan gå norr på [2][1] då [1][1] är null
                         System.out.println("\nYou cant go north");
                         break;
+                    }
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
+                       System.out.println("\nThe door going north seems to be locked\n" +
+                                 "Maybe a key could open it.");
+                       
+                        break;
                      }
-                        if(playerX == 1 && playerY == 2 && KeyPickedup == true){
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
                         playerX--;
                         doorLock[1][2].getLocked();
                         roomDoorStatus("North"); //hämtar metod
                         break;
                     }
-                        if(playerX == 1 && playerY == 2 && KeyPickedup == false){
+                        if(playerX == 1 && playerY == 2 && KeyPickedup == false && doorLocked == true){
                         doorLock[1][2].getLocked();
+                        
                          System.out.println("\nThe door going north seems to be locked\n" +
                                  "Maybe a key could open it.");
                         
@@ -245,18 +257,27 @@ public class Dungeon {
                      if (PotionPickedup == false){
                          System.out.println("\nYou cant use a Health Potion because you dont have one in your inventory.");
                          break;
-                     }
-                case "I":
-                    if (PotionPickedup == true){
-                        
+                     
                      }
                      case "q": //hämtar metod för att avsluta spelet
                         System.out.println("\nYou quit the game."); 
                         endGame();
+            
+                case "u":
+                    if(playerX == 1 && playerY == 2 && KeyPickedup == true && doorLocked == true){
                         
+                        doorLocked = false;
+                        System.out.println("\nYou used a Key to unlock the door");
+                        break;
+                    }
+                    else
+                        System.out.println("\nThere is nothing to be use here");
+                        break;
                     // skriver ut att använda korrekt bokstäver
                 default:
-                    System.out.println("\nError. Use n, w, e, or s."); 
+                    System.out.println("\nError. Use [n], [w], [e], [s] to move.\n"+
+                            "Or [p], [hp], [u] to perform a task\n"+
+                            "Or [q] to quit the game"); 
             }
             
             //läser av vart i "grid" man är, är rummet = Exit -> break
