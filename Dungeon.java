@@ -13,34 +13,39 @@ public class Dungeon {
     System.out.println(dungeon[playerX][playerY].getDescription());
     Player player = new Player(PlayerHealth,PlayerDamage);
 
-        
+        // If-sats, Om alla krav stämmer så hämtas getPotion metoden och ändrar roomEvisit till true
         if (playerX == 1 && playerY == 2 && PotionPickedup == false && UsedPotion == false){
                         Potion.getPotion();
                          System.out.println("Pickup [p] the Potion to add it to your inventory");
                         roomEVisit = true;
                         
         }
+          // If-sats, Om alla krav stämmer så hämtas getSword metoden och ändrar roomCvisit till true
         if (playerX == 2 && playerY == 0 && SwordPickedup == false ){
                        Weapon.getSword(); 
                         System.out.println("Pickup [p] the Sword to add it to your inventory");
                         roomCVisit = true;
                          
         }
+        // If-sats, Om alla krav stämmer så hämtas getKey metoden och ändrar roomBvisit till true
         if (playerX == 2 && playerY == 2 && KeyPickedup == false){
                        Key.getKey();
                        System.out.println("Pickup [p] the key to add it to your inventory");
                         roomBVisit = true;
                           
         }
+        // If-sats, Om alla krav stämmer så hämtas getTreasure metoden och ändrar TreasurePickedup till true
         if (playerX == 0 && playerY == 0 && dragonDefeat == true){
                        Treasure.getTreasure();
                         TreasurePickedup = true;  
        
         }
+        // If-sats, Om alla krav stämmer så skrivs ut att dörren är låst
          if(playerX == 1 && playerY == 2 && KeyPickedup == false){
            System.out.println("\nThe " + doorLock[1][2].getPosition()
                 + " door appears to be locked");
         }
+        // If-sats, Om alla krav stämmer så hämtas skrivs ut att dörren är låst men kan öppnas med nyckeln
          if (playerX == 1 && playerY == 2 && KeyPickedup == true) {
             System.out.println("\nThe " + doorLock[1][2].getPosition()
                 + " door appears to be locked\n" +
