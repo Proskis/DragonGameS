@@ -1,15 +1,15 @@
 
 package dragontreasure;
    
-//Subklassen Key 
+//Subklassen 'Key' till superklassen 'Item'
  class Key extends Item{
  
-    //Konstruktor
+    //Konstruktor för att hämta namn, beskrivning och bild för nyckeln
     public Key(String name, String description,String itemPicture){
         
         super(name, description, itemPicture); // Anropar superklassen 'Item's konstruktor
     }
-
+// Metod för att göra ett föremål 'key' och skriva ut objektet
  public static void getKey(){
         Item Key = new Key("Key","A key of somesort, who knows what it unlocks... "," \n" +
                 "===========================================\n" +
