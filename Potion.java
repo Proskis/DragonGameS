@@ -5,7 +5,7 @@ package dragontreasure;
   class Potion extends Item{
     private int Healing;
     
-    //Konstruktor
+    //Konstruktor för att hämta namn, beskrivning, bild på förmeålet och healing
     public Potion(String name, String description,String itemPicture, int Healing){
         
         super(name, description, itemPicture); // Anropar superklassen 'Item's konstruktor
@@ -20,7 +20,7 @@ package dragontreasure;
     public void setHealing(int Healing){
         this.Healing = Healing;
     }
-
+// Metod för att skapa ett nytt objekt Potion och skriva ut objektet
  public static void getPotion(){
         Item potion = new Potion("Health Potion","A potion, when consumed heals the player "," \n" +
                 "==================\n"+
