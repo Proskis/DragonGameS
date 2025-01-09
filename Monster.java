@@ -2,7 +2,8 @@
 package dragontreasure;
 
 public class Monster {
-    
+
+    //variabel för health och attackdamage
     private int health;
     private int attackDamage;
     
