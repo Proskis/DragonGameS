@@ -87,21 +87,21 @@ public class Room {
     public static boolean doBattle(Player player, Monster monster) {
         
         // Loop som körs tills en av parterna har 0 eller lägre i hälsa
-        while (player.getPlayerHealth() > 0 && monster.getHealth() > 0) {
+        while (player.getHealth() > 0 && monster.getHealth() > 0) {
             // Spelaren attackerar först
-            monster.setHealth(monster.getHealth() - player.getPlayerAttackDamage());
-            System.out.println("You attacked the monster and dealt: " + player.getPlayerAttackDamage()+ " damage");
+            monster.setHealth(monster.getHealth() - player.getAttackDamage());
+            System.out.println("You attacked the monster and dealt: " + player.getAttackDamage()+ " damage");
             
             if (monster.getHealth() <= 0) {
-                System.out.println("The monster has been defeated! You have: "+ player.getPlayerHealth()+ " HP left");
+                System.out.println("The monster has been defeated! You have: "+ player.getHealth()+ " HP left");
                 return true;
             }
 
             // Monstret attackerar
-            player.setPlayerHealth(player.getPlayerHealth() - monster.getAttackDamage());
+            player.setHealth(player.getHealth() - monster.getAttackDamage());
             System.out.println("The monster attacked you and dealt: " + monster.getAttackDamage()+" damage");
             
-            if (player.getPlayerHealth() <= 0) {
+            if (player.getHealth() <= 0) {
                 System.out.println("You have been defeated by the monster!");
                 return false;
                    
